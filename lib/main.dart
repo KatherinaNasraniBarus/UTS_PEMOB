@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'screens/home_screen.dart';
+import 'screens/landing_screen.dart';
 
 void main() {
   runApp(const QuizApp());
@@ -16,11 +15,9 @@ class QuizApp extends StatelessWidget {
       title: 'Quiz App',
       theme: ThemeData(
         primarySwatch: Colors.purple,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
-        ),
+        fontFamily: 'Poppins',
       ),
-      home: HomeScreen(),
+      home: const LandingScreen(),
     );
   }
 }
