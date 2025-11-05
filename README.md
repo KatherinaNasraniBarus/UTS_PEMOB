@@ -46,9 +46,13 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
 
 **Screenshot:**
 
-| Home Screen | Quiz Screen (Dart) | Dialog Hasil | Hasil |
+| Landing Page | Home Screen | Quiz Screen (Dart) |
 | :---: | :---: | :---: |
-| ![Home Screen](assets/images/home_screen.png) | ![Quiz Screen](assets/images/quiz_screen.png) | ![Result Screen](assets/images/result_screen.png) |
+| ![Landing Page](assets/images/landing_page.png) | ![Home Screen](assets/images/home.png) | ![Quiz Screen Dart](assets/images/quiz_screen_dart.png) |
+
+| Quiz Screen (C++) | Dialog Hasil |
+| :---: | :---: |
+| ![Quiz Screen C++](assets/images/quiz_screen_cpp.png) | ![Result Screen](assets/images/result_screen.png) |
 
 
    
