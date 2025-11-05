@@ -12,10 +12,25 @@ Aplikasi ini memungkinkan pengguna untuk memasukkan nama mereka, memilih kategor
 
 **Fitur Utama:**
 
-* **Validasi Nama:** Pengguna harus memasukkan nama sebelum memulai kuis.
-* **Pemilihan Kategori:** UI yang bersih untuk memilih antara kuis C++ atau Dart.
-* **UI Responsif:** Tampilan beradaptasi dengan baik pada berbagai ukuran layar (dari ponsel kecil hingga tablet).
-* **Sistem Kuis:** Menampilkan satu pertanyaan pada satu waktu dengan opsi pilihan ganda.
-* **Perhitungan Skor:** Skor dihitung berdasarkan jawaban yang benar (setiap jawaban benar bernilai 20 poin).
-* **Dialog Hasil:** Menampilkan skor akhir setelah kuis selesai dengan opsi untuk kembali ke layar utama.
+* **Validasi Nama :** Pengguna harus memasukkan nama sebelum memulai kuis.
+* **Pemilihan Kategori :** UI yang bersih untuk memilih antara kuis C++ atau Dart.
+* **UI Responsif :** Tampilan beradaptasi dengan baik pada berbagai ukuran layar (dari ponsel kecil hingga tablet).
+* **Sistem Kuis :** Menampilkan satu pertanyaan pada satu waktu dengan opsi pilihan ganda.
+* **Perhitungan Skor :** Skor dihitung berdasarkan jawaban yang benar (setiap jawaban benar bernilai 20 poin).
+* **Dialog Hasil :** Menampilkan skor akhir setelah kuis selesai dengan opsi untuk kembali ke layar utama.
+
+### Credit Aset & Dependensi
+
+Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
+
+1.  **Dependensi:**
+    * `google_fonts`: Digunakan untuk memuat font "Poppins" di seluruh aplikasi. (Sumber: [fonts.google.com](https://fonts.google.com/specimen/Poppins))
+
+2.  **Aset Gambar (Harap isi sumbernya):**
+    * `assets/images/header_bg.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
+    * `assets/images/cpp_logo.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
+    * `assets/images/dart_logo.png`: https://share.google/images/pXHCNF5XF69G8DQO7
+    * `assets/images/c++_background.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
+    * `assets/images/dart_background.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
+    * `assets/images/logo.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
 
