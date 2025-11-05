@@ -42,7 +42,7 @@ class LandingScreen extends StatelessWidget {
                     const SizedBox(height: 30),
 
                     Text(
-                      'Welcome to Quiz App',
+                      'Welcome to DevQuiz',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                         fontSize: isWide ? 32 : 24,
