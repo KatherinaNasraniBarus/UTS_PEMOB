@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/category_button.dart';
+import 'quiz_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,19 +18,43 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  void _startQuiz(String category) {
+    print('✅ _startQuiz dipanggil ($category)');
+    String userName = _nameController.text.trim();
+
+    if (userName.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter your name first!')),
+      );
+      return;
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizScreen(
+          category: category,
+          userName: userName,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: Color(0xFFF0F0F0),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            _buildHeader(size),
-            _buildContent(context),
-          ],
-        ),
+      backgroundColor: const Color(0xFFF0F0F0),
+      body: Column(
+        children: [
+          _buildHeader(size),
+          Expanded(
+            child: SingleChildScrollView(
+              child: _buildContent(context),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -38,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       height: size.height * 0.45,
       width: double.infinity,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/images/header_bg.png'),
           fit: BoxFit.cover,
@@ -54,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Enter Your Name :',
               style: TextStyle(
                 color: Colors.white,
@@ -62,24 +87,27 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             TextField(
               controller: _nameController,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 hintStyle: TextStyle(
-                    color: Colors.purple[800]?.withOpacity(0.5),
-                    fontWeight: FontWeight.normal),
+                  color: Colors.purpleAccent.withOpacity(0.5),
+                  fontWeight: FontWeight.normal,
+                ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(15),
                   borderSide: BorderSide.none,
                 ),
                 contentPadding:
-                EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
               ),
               style: TextStyle(
-                  color: Colors.purple[800], fontWeight: FontWeight.bold),
+                color: Colors.purple[800],
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: size.height * 0.05),
           ],
@@ -98,14 +126,14 @@ class _HomeScreenState extends State<HomeScreen> {
             title: 'C++',
             imagePath: 'assets/images/cpp_logo.png',
             color: Colors.purple[800]!,
-            onTap: () {},
+            onTap: () => _startQuiz('C++'),
           ),
-          SizedBox(height: 50),
+          const SizedBox(height: 20),
           CategoryButton(
             title: 'Dart',
             imagePath: 'assets/images/dart_logo.png',
             color: Colors.purple[800]!,
-            onTap: () {},
+            onTap: () => _startQuiz('Dart'),
           ),
         ],
       ),
