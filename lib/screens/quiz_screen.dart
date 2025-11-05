@@ -152,180 +152,227 @@ class _QuizScreenState extends State<QuizScreen>
   Widget build(BuildContext context) {
     super.build(context);
     final size = MediaQuery.of(context).size;
-    final Question currentQuestion = _questions[_currentQuestionIndex];
+    final double screenWidth = size.width;
+    final double screenHeight = size.height;
+
+    // 🔹 Skala UI responsif
+    double scale = screenWidth < 400
+        ? 0.9
+        : screenWidth < 600
+        ? 1.0
+        : screenWidth < 900
+        ? 1.1
+        : 1.25;
 
     String backgroundImage = widget.category == 'Dart'
         ? 'assets/images/dart_background.png'
         : 'assets/images/c++_background.png';
 
+    final Question currentQuestion = _questions[_currentQuestionIndex];
+
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F0F0),
+      backgroundColor: const Color(0xFFF8F8F8),
       body: SafeArea(
-        child: Column(
-          children: [
-            _buildHeader(size, backgroundImage),
-            const SizedBox(height: 5),
-            Expanded(
-              child: SingleChildScrollView(
-                child: _buildQuestionCard(currentQuestion),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1000),
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: 20 * scale, vertical: 10 * scale),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    // 🔹 Header adaptif
+                    Container(
+                      height: screenHeight * 0.35,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage(backgroundImage),
+                          fit: BoxFit.cover,
+                          alignment: const Alignment(0, -0.4),
+                        ),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.black.withOpacity(0.6),
+                              Colors.transparent
+                            ],
+                          ),
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.all(20 * scale),
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${widget.category} Quiz',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 26 * scale,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 6 * scale),
+                                Text(
+                                  'Welcome, ${widget.userName}',
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 16 * scale,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 30 * scale),
+
+                    // Kontainer soal responsif
+                    Transform.scale(
+                      scale: scale <= 1.0 ? 1.0 : 1.05,
+                      child: _buildQuestionCard(currentQuestion, scale),
+                    ),
+                    SizedBox(height: 20 * scale),
+
+                    // Tombol Next responsif
+                    Container(
+                      width: double.infinity,
+                      constraints: const BoxConstraints(maxWidth: 500),
+                      child: ElevatedButton(
+                        onPressed:
+                        _selectedOptionIndex != null ? _goToNextQuestion : null,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          foregroundColor: Colors.white,
+                          minimumSize: Size(double.infinity, 55 * scale),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          disabledBackgroundColor: Colors.grey[300],
+                        ),
+                        child: Text(
+                          _currentQuestionIndex == _questions.length - 1
+                              ? 'Finish'
+                              : 'Next',
+                          style: TextStyle(
+                              fontSize: 18 * scale, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40 * scale),
+                  ],
+                ),
               ),
             ),
-            const SizedBox(height: 10),
-            _buildNextButton(),
-            const SizedBox(height: 15),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  // 🔹 Header
-  Widget _buildHeader(Size size, String backgroundImage) {
-    return Container(
-      height: size.height * 0.40,
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage(backgroundImage),
-          fit: BoxFit.cover,
-          alignment: const Alignment(0, -0.4),
-        ),
-        borderRadius: const BorderRadius.only(
-          bottomLeft: Radius.circular(30),
-          bottomRight: Radius.circular(30),
-        ),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${widget.category} Quiz',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Welcome, ${widget.userName}',
-            style: TextStyle(
-              color: Colors.white.withOpacity(0.9),
-              fontSize: 17,
-            ),
-          ),
-          const SizedBox(height: 10),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildQuestionCard(Question question) {
+  Widget _buildQuestionCard(Question question, double scale) {
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0), // 🔹 lebih dekat ke atas
-      padding: const EdgeInsets.all(20.0),
+      margin: EdgeInsets.symmetric(horizontal: 10 * scale),
+      padding: EdgeInsets.all(20 * scale),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20 * scale),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: 10,
             offset: const Offset(0, 5),
-          ),
+          )
         ],
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Question ${_currentQuestionIndex + 1}/${_questions.length}',
-            style: const TextStyle(
-              color: Colors.purple,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 15),
-          Text(
-            question.questionText,
-            style: const TextStyle(
-              color: Colors.black87,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          const SizedBox(height: 25),
-          ...List.generate(question.options.length, (index) {
-            bool isSelected = _selectedOptionIndex == index;
-            return _buildOptionTile(
-              optionText: question.options[index],
-              isSelected: isSelected,
-              onTap: () => _onOptionSelected(index),
-            );
-          }),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          double fontScale =
+          constraints.maxWidth < 400 ? 0.9 : constraints.maxWidth < 700 ? 1.0 : 1.2;
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+                style: TextStyle(
+                  color: Colors.purple,
+                  fontSize: 16 * fontScale,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10 * fontScale),
+              Text(
+                question.questionText,
+                style: TextStyle(
+                  fontSize: 18 * fontScale,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: 25 * fontScale),
+              ...List.generate(
+                question.options.length,
+                    (index) {
+                  bool isSelected = _selectedOptionIndex == index;
+                  return _buildOptionTile(
+                    question.options[index],
+                    isSelected,
+                        () => _onOptionSelected(index),
+                    fontScale,
+                  );
+                },
+              ),
+            ],
+          );
+        },
       ),
     );
   }
 
-  Widget _buildOptionTile({
-    required String optionText,
-    required bool isSelected,
-    required VoidCallback onTap,
-  }) {
+  Widget _buildOptionTile(
+      String text, bool selected, VoidCallback onTap, double fontScale) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10.0),
+      padding: const EdgeInsets.only(bottom: 10),
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(15),
-        child: Container(
+        borderRadius: BorderRadius.circular(15 * fontScale),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 250),
           width: double.infinity,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+          padding: EdgeInsets.symmetric(
+            horizontal: 16 * fontScale,
+            vertical: 12 * fontScale,
+          ),
           decoration: BoxDecoration(
-            color: isSelected ? Colors.purple[50] : Colors.grey[100],
+            color: selected ? Colors.purple[50] : Colors.grey[100],
             border: Border.all(
-              color: isSelected ? Colors.purple : Colors.grey[300]!,
+              color: selected ? Colors.purple : Colors.grey[300]!,
               width: 2,
             ),
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(15 * fontScale),
           ),
           child: Text(
-            optionText,
+            text,
             style: TextStyle(
-              color: isSelected ? Colors.purple : Colors.black87,
-              fontSize: 16,
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              fontSize: 16 * fontScale,
+              color: selected ? Colors.purple : Colors.black87,
+              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
             ),
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNextButton() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30),
-      child: ElevatedButton(
-        onPressed: _selectedOptionIndex != null ? _goToNextQuestion : null,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple,
-          foregroundColor: Colors.white,
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          padding: const EdgeInsets.symmetric(vertical: 15),
-          disabledBackgroundColor: Colors.grey[300],
-          shadowColor: Colors.purple.withOpacity(0.4),
-          elevation: 6,
-        ),
-        child: Text(
-          _currentQuestionIndex == _questions.length - 1 ? 'Finish' : 'Next',
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );

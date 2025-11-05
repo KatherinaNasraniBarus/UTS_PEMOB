@@ -19,7 +19,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _startQuiz(String category) {
-    print('✅ _startQuiz dipanggil ($category)');
     String userName = _nameController.text.trim();
 
     if (userName.isEmpty) {
@@ -43,38 +42,51 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bool isWide = size.width > 700;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF0F0F0),
-      body: Column(
-        children: [
-          _buildHeader(size),
-          Expanded(
+      body: SafeArea(
+        child: Center(
+          child: ConstrainedBox(
+            constraints:
+            const BoxConstraints(maxWidth: 900),
             child: SingleChildScrollView(
-              child: _buildContent(context),
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  _buildHeader(size, isWide),
+                  _buildContent(context, isWide),
+                ],
+              ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildHeader(Size size) {
+  // 🔹 Bagian Header
+  Widget _buildHeader(Size size, bool isWide) {
     return Container(
-      height: size.height * 0.45,
+      height: isWide ? 320 : size.height * 0.45,
       width: double.infinity,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/images/header_bg.png'),
+          image: const AssetImage('assets/images/header_bg.png'),
           fit: BoxFit.cover,
+          alignment: isWide ? const Alignment(0, -0.25) : Alignment.topCenter,
         ),
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: EdgeInsets.symmetric(
+          horizontal: isWide ? 48.0 : 24.0,
+          vertical: isWide ? 1.0 : 0,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,6 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
+                hintText: 'Fimelia Anadiba',
                 hintStyle: TextStyle(
                   color: Colors.purpleAccent.withOpacity(0.5),
                   fontWeight: FontWeight.normal,
@@ -109,16 +122,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: size.height * 0.05),
+            SizedBox(height: isWide ? 30 : size.height * 0.05),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildContent(BuildContext context) {
+  // 🔹 Bagian Konten Bawah
+  Widget _buildContent(BuildContext context, bool isWide) {
     return Container(
-      padding: const EdgeInsets.all(30.0),
+      padding: EdgeInsets.symmetric(
+        horizontal: isWide ? 60.0 : 30.0,
+        vertical: isWide ? 40.0 : 30.0,
+      ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -129,12 +146,14 @@ class _HomeScreenState extends State<HomeScreen> {
             onTap: () => _startQuiz('C++'),
           ),
           const SizedBox(height: 20),
+
           CategoryButton(
             title: 'Dart',
             imagePath: 'assets/images/dart_logo.png',
             color: Colors.purple[800]!,
             onTap: () => _startQuiz('Dart'),
           ),
+          const SizedBox(height: 40),
         ],
       ),
     );
