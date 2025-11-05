@@ -39,7 +39,16 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
     * `assets/images/c++_background.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
     * `assets/images/dart_background.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
     * `assets/images/logo.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
+  
+### Video Aplikasi
 
+![Demo Aplikasi](assets/images/demo.gif)
+
+**Screenshot:**
+
+| Home Screen | Quiz Screen (Dart) | Dialog Hasil | Hasil |
+| :---: | :---: | :---: |
+| ![Home Screen](assets/images/home_screen.png) | ![Quiz Screen](assets/images/quiz_screen.png) | ![Result Screen](assets/images/result_screen.png) |
 
 
    
