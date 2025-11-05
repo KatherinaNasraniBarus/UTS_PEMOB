@@ -40,7 +40,9 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
     * `assets/images/dart_background.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
     * `assets/images/logo.png`: https://www.figma.com/design/cVNGM07Xudcq4dOjgPZ8kk/Quiz-App--Community-?node-id=0-1&t=um16CDtTIBYfVReX-1
   
-### Video Aplikasi
+### Video Aplikasi & Screenshot
+
+**Demo Aplikasi**
 
 ![Demo Aplikasi](assets/images/demo.gif)
 
