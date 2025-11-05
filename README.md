@@ -42,7 +42,7 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
   
 ### Video Aplikasi & Screenshot
 
-**Demo Aplikasi**
+**Demo Aplikasi:**
 
 ![Demo Aplikasi](assets/images/demo.gif)
 
@@ -56,5 +56,8 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
 | :---: | :---: |
 | ![Quiz Screen C++](assets/images/quiz_screen_cpp.png) | ![Result Screen](assets/images/result_screen.png) |
 
+### Mockup / Prototype Aplikasi
 
-   
+Anda dapat melihat mockup desain untuk aplikasi ini di Figma:
+
+[**Lihat Mockup di Figma**](https://www.figma.com/design/dVcNYIARCZtXUl7GIIsUrK/Quiz-App--Community---Copy-?node-id=0-1&t=mLv9dRI4s4ReZ2tV-1)
