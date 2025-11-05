@@ -44,6 +44,11 @@ Aplikasi ini menggunakan beberapa aset eksternal dan dependensi:
 
 ![Demo Aplikasi](assets/images/demo.gif)
 
+**Screenshot:**
+
+| Home Screen | Quiz Screen (Dart) | Dialog Hasil |
+| :---: | :---: | :---: |
+| | | |
 
 
    
